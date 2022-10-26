@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import Rol from '../models/Rol';
 require('dotenv').config({path: 'variables.env'})
 let refreshTokens = [];
+
+
 export const signIn = async (req, res) =>{
     //Populate regresa objeto entero no solo id aparece el nombre del rol también je je
     const userFound = await User.findOne({email : req.body.email}).populate("roles");
@@ -63,6 +65,28 @@ export const signIn = async (req, res) =>{
     
     }
     }
+}
+export const gameUserRegister = async(req, res)=>{
+    const {nombre}=req.body;
+    console.log(req.body);
+    const newUser = new User({
+        nombre, 
+        username : nombre
+    })
+        //Si no ingresa nada busca el rol usuario y lo crea
+        const rol = await Rol.findOne({nombreRol : "user"});
+        //Obtiene el id del rol usuario
+        newUser.roles = [rol._id];
+
+    const savedUser = await newUser.save();
+    console.log(savedUser);
+       //Cookies
+       // En el date la cookie esta para 300 seconds
+       res.status(202)
+        .send({
+            message:"Creación completa",
+            datosUsuario : savedUser
+        })
 }
 export const signup = async(req, res) =>{
     const {nombre, cedula, fecha_nacimiento, sexo, estado_civil, religion, ocupacion, lugar_nacimiento, residencia, domicilio, telefono, estado, imagen, username, email, password, roles}=req.body;

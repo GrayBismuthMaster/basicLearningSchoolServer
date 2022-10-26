@@ -6,6 +6,7 @@ import {authJwt, verifySignup} from '../middlewares'
 
 router.post('/signin', authController.signIn);
 router.post('/signup', /*verifySignup.checkRolesExisted,*/ /*verifySignup.checkDuplicateUsernameOrEmail, */authController.signup);
+router.post('/userGame/signup',authController.gameUserRegister);
 router.post('/refresh',authController.refreshToken);
 router.get('/verify', authJwt.verifyTokenReturnUser);
 router.get('/logout',authController.logOut)
