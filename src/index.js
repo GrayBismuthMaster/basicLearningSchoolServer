@@ -11,7 +11,6 @@ if(process.env.NODE_ENV !== 'production'){
     app.listen({port:process.env.DEV_PORT||5001},()=>{
         console.log(`Servidor Levantado en el puerto ${process.env.PORT}`);
     }); 
-
 }else{
     console.log("production");
     const mongoEnvPro = process.env.DB_MONGO_PRO;

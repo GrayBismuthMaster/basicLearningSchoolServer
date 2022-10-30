@@ -38,7 +38,6 @@ const usuarioSchema = new mongoose.Schema({
                                 ref: "Rol",
                                 type: mongoose.Schema.Types.ObjectId      
                             }]
-
 },{
     timestamps:true,
     versionKey: false
