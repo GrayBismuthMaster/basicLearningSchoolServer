@@ -9,29 +9,18 @@ const usuarioSchema = new mongoose.Schema({
                                 type: Date, 
                                 default:Date.now()
                             },
-    imagen              :   {
-                                type : String, 
-                            },
+    id_profesor         :   [{
+                                type : String,
+                                required : true
+                            }],
+    id_estudiante       :   [{
+                                type : String,
+                                required : true
+                            }],
     estado              :   {
                                 type: Boolean,
                                 default: true
                             },
-    username            :   {
-                                type:String, 
-                                // unique:true
-                            },
-    email               :   {
-                                type: String,
-                                required: true
-                            },
-    password            :   {
-                                type: String,
-                                required:true
-                            },
-    roles               :   [{                                
-                                ref: "Rol",
-                                type: mongoose.Schema.Types.ObjectId      
-                            }]
 },{
     timestamps:true,
     versionKey: false

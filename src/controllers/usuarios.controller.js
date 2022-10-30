@@ -7,18 +7,7 @@ export const createUser = async (req, res) =>{
         let body = req.body;
         const usuario  = new Usuario({
             nombre           : body.nombre,
-            cedula           : body.cedula,
-            fecha_nacimiento : new Date(`${body.fecha_nacimiento.substring(0,4)}/${body.fecha_nacimiento.substring(5,7)}/${body.fecha_nacimiento.substring(8,10)}`),
-            sexo             : body.sexo,
-            estado_civil     : body.estado_civil,
-            religion         : body.religion,
-            ocupacion        : body.ocupacion,
-            lugar_nacimiento : body.lugar_nacimiento,
-            residencia       : body.residencia,
-            domicilio        : body.domicilio,
-            telefono         : body.telefono,
             estado           : body.estado,
-            imagen           : body.imagen,
             username         : body.username,
             email            : body.email,
             password         : await Usuario.encryptPassword(body.password)
