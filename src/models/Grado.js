@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const usuarioSchema = new mongoose.Schema({
+const gradoSchema = new mongoose.Schema({
     nombre              :   { 
                                 type: String,
                                 required:true
@@ -9,13 +8,13 @@ const usuarioSchema = new mongoose.Schema({
                                 type: Date, 
                                 default:Date.now()
                             },
-    id_profesor         :   [{
-                                type : String,
-                                required : true
+    id_profesores       :   [{
+                                ref: "Usuario",
+                                type: mongoose.Schema.Types.ObjectId
                             }],
-    id_estudiante       :   [{
-                                type : String,
-                                required : true
+    id_materias         :   [{                                
+                                ref: "Materia",
+                                type: mongoose.Schema.Types.ObjectId      
                             }],
     estado              :   {
                                 type: Boolean,
@@ -25,13 +24,14 @@ const usuarioSchema = new mongoose.Schema({
     timestamps:true,
     versionKey: false
 });
-usuarioSchema.statics.encryptPassword = async(password) =>{
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
-}
-usuarioSchema.statics.comparePassword = async (password, receivedPassword) => {
-    return await bcrypt.compare(password, receivedPassword);
-}
+// usuarioSchema.statics.encryptPassword = async(password) =>{
+//     const salt = await bcrypt.genSalt(10);
+//     return await bcrypt.hash(password, salt);
+// }
+// usuarioSchema.statics.comparePassword = async (password, receivedPassword) => {
+//     return await bcrypt.compare(password, receivedPassword);
+// }
+
 // usuarioSchema.statics.setImagen = function setImagen (filename) { 
 //     const host = process.env.HOST;
 //     const port = process.env.PORT;
@@ -124,4 +124,4 @@ eliminarDocumento('656232as2d3as2d3')
 
 */
 
-module.exports = mongoose.model('Usuario',usuarioSchema);
+module.exports = mongoose.model('Grado',gradoSchema);

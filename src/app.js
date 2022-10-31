@@ -24,6 +24,7 @@ import auth from './routes/auth.routes'
 import profile from './routes/profile.routes' ;
 // import pdf from './routes/pdf.routes'
 import uploads from './routes/uploads.routes'
+import grados from './routes/grados.routes'
 //Url encoded permite trabajar con query strings 
 //Permite el envío por formularios
 app.use(express.urlencoded({extended:true}));
@@ -57,6 +58,7 @@ app.use('/api/usuarios',usuarios);
 app.use('/api/auth',auth);
 app.use('/api/profile', profile );
 // app.use('/api/pdf' ,pdf )
-app.use('/api/uploads', uploads)
+app.use('/api/uploads', uploads);
+app.use('/api/grados', grados);
 //Nuevo para recuperar app
 module.exports=app;
