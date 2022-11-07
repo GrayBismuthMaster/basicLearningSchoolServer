@@ -23,8 +23,11 @@ import usuarios from './routes/usuarios.routes';
 import auth from './routes/auth.routes'
 import profile from './routes/profile.routes' ;
 // import pdf from './routes/pdf.routes'
-import uploads from './routes/uploads.routes'
-import grados from './routes/grados.routes'
+import uploads from './routes/uploads.routes';
+import grados from './routes/grados.routes';
+import materias from './routes/materias.routes';
+import gradosEstudiantes from './routes/gradosEstudiantes.routes';
+import detallesPartidas from './routes/detallesPartidas.routes';
 //Url encoded permite trabajar con query strings 
 //Permite el envío por formularios
 app.use(express.urlencoded({extended:true}));
@@ -60,5 +63,8 @@ app.use('/api/profile', profile );
 // app.use('/api/pdf' ,pdf )
 app.use('/api/uploads', uploads);
 app.use('/api/grados', grados);
+app.use('/api/materias', materias);
+app.use('/api/gradosEstudiantes', gradosEstudiantes);
+app.use('/api/detallesPartidas', detallesPartidas);
 //Nuevo para recuperar app
 module.exports=app;

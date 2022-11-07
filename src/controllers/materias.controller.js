@@ -1,17 +1,11 @@
-const Grado = require('../models/Grado');
-const Rol = require ('../models/Rol');
+const Materia = require('../models/Materia');
 
-import jwt from 'jsonwebtoken';
-require('dotenv').config({path: 'variables.env'});
-
-export const createGrado = async (req, res) =>{
-        const {nombre, id_profesores, id_materias} = req.body;
-        const grado  = new Grado({
+export const createMateria = async (req, res) =>{
+        const {nombre} = req.body;
+        const materia  = new Materia({
             nombre,      
-            id_profesores,   
-            id_materias  
         })
-        console.log("Grado"+grado)
+        console.log("Materia"+materia)
         // if(roles){
         //     console.log(body.roles)
         //     const foundRol = await Rol.find({nombreRol :{$in: body.roles}})
@@ -22,12 +16,33 @@ export const createGrado = async (req, res) =>{
         //Obtiene el id del rol usuario
         // usuario.roles = [rol._id];
         // }
-        const savedGrado = await grado.save();
-        
+        const savedMateria = await materia.save();
+        //Token para 24 horas
+        // const accessToken = jwt.sign({id: savedUser._id},process.env.ACCESSTOKEN,{
+        // expiresIn: 86400
+        // })
+        // const refreshToken = jwt.sign({id: savedUser._id},process.env.REFRESHTOKEN,{
+        //     expiresIn: 86400
+        // })
+        //LocalStorage
+       // res.status(200).json({accessToken})
+       //Cookies
+       // En el date la cookie esta para 300 seconds
        res.status(202)
+        // .cookie('accessToken', accessToken, 
+        // {
+        //     expires: new Date( new Date().getTime() + 300 * 100), 
+        //     sameSite: 'strict',
+        //      httpOnly: true
+        // })
+        // .cookie('refreshToken',refreshToken,{
+        //     expires: new Date( new Date().getTime() + 300 * 100), 
+        //     sameSite: 'strict',
+        //     httpOnly: true
+        // })
         .send({
             message:"Creación completa",
-            data: savedGrado,
+            data: savedMateria,
         })
        /*
         const resultado = crearUsuario(body);
@@ -43,26 +58,26 @@ export const createGrado = async (req, res) =>{
         })
     */
 }
-export const getGrados = (req, res) =>{
+export const getMaterias = (req, res) =>{
       //res.send("Welcome to user ");
-      let grados = obtenerGrados();
-      grados.then((accesoGrados)=>{
-          res.json(accesoGrados)
+      let materias = obtenerMaterias();
+      materias.then((accesoMaterias)=>{
+          res.json(accesoMaterias)
       })
       .catch((error)=>{
           console.log(error);
       })
 }
-export const getGradoById = async (req, res) =>{
-        const grado = await Grado.findById(req.params.id);
-        res.status(200).json(grado);
+export const getMateriaById = async (req, res) =>{
+        const materia = await Materia.findById(req.params.id);
+        res.status(200).json(materia);
 }
-export const updateGradoById = async (req, res) =>{
+export const updateMateriaById = async (req, res) =>{
         //Para obtener datos actualizados el tercer param
-        const gradoActualizado = await Grado.findByIdAndUpdate(req.params.id, req.body ,{
+        const materiaActualizado = await Materia.findByIdAndUpdate(req.params.id, req.body ,{
             new :true
         });
-        res.status(200).json(gradoActualizado);
+        res.status(200).json(materiaActualizado);
         //Encontrar si existe el objeto
         //Buscando usuario pero como es int entonces parseamos
         //let usuario = existeUsuario();
@@ -80,8 +95,8 @@ export const updateGradoById = async (req, res) =>{
         res.send(usuario);
         */
 }
-export const deleteGradoById = async (req, res)=>{
-        await Grado.findByIdAndDelete(req.params.id);
+export const deleteMateriaById = async (req, res)=>{
+        await Materia.findByIdAndDelete(req.params.id);
         res.status(204).json();
         //let usuario = existeUsuario(req.params.id);
         //Revisando que exista caso contrario enviamos un cod 404
@@ -96,16 +111,16 @@ export const deleteGradoById = async (req, res)=>{
 
 //FUNCIONES DE LOS CONTROLLERS-------------------------------------------------------------------------------------------------------------
 
-const obtenerGrados =async  ()=>{
-    const grados = await Grado.find({}).populate("id_materias").populate("id_profesores");
-    return grados;
+const obtenerMaterias =async  ()=>{
+    const materias = await Materia.find({});
+    return materias;
 }
 
 //Obtener usuario por ID
-const validarUsuario = (nom)=>{
-    //Agregando JOI para validaciones
-    const schema = Joi.object({
-        nombre: Joi.string().min(3).required()
-    });
-    return (schema.validate({ nombre:nom}))
-}
+// const validarUsuario = (nom)=>{
+//     //Agregando JOI para validaciones
+//     const schema = Joi.object({
+//         nombre: Joi.string().min(3).required()
+//     });
+//     return (schema.validate({ nombre:nom}))
+// }

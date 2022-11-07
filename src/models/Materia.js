@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const usuarioSchema = new mongoose.Schema({
+const materiaSchema = new mongoose.Schema({
     nombre              :   { 
                                 type: String,
                                 required:true
@@ -9,40 +8,22 @@ const usuarioSchema = new mongoose.Schema({
                                 type: Date, 
                                 default:Date.now()
                             },
-    imagen              :   {
-                                type : String, 
-                            },
     estado              :   {
                                 type: Boolean,
                                 default: true
                             },
-    username            :   {
-                                type:String,
-                                required : false,
-                                unique : false ,
-                                default : Date.now()
-                            },
-    email               :   {
-                                type: String,
-                            },
-    password            :   {
-                                type: String,
-                            },
-    roles               :   [{                                
-                                ref: "Rol",
-                                type: mongoose.Schema.Types.ObjectId      
-                            }]
 },{
     timestamps:true,
     versionKey: false
 });
-usuarioSchema.statics.encryptPassword = async(password) =>{
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
-}
-usuarioSchema.statics.comparePassword = async (password, receivedPassword) => {
-    return await bcrypt.compare(password, receivedPassword);
-}
+// usuarioSchema.statics.encryptPassword = async(password) =>{
+//     const salt = await bcrypt.genSalt(10);
+//     return await bcrypt.hash(password, salt);
+// }
+// usuarioSchema.statics.comparePassword = async (password, receivedPassword) => {
+//     return await bcrypt.compare(password, receivedPassword);
+// }
+
 // usuarioSchema.statics.setImagen = function setImagen (filename) { 
 //     const host = process.env.HOST;
 //     const port = process.env.PORT;
@@ -135,4 +116,4 @@ eliminarDocumento('656232as2d3as2d3')
 
 */
 
-module.exports = mongoose.model('Usuario',usuarioSchema);
+module.exports = mongoose.model('Materia',materiaSchema);

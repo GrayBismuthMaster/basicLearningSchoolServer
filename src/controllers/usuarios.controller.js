@@ -4,13 +4,20 @@ import jwt from 'jsonwebtoken';
 require('dotenv').config({path: 'variables.env'});
 
 export const createUser = async (req, res) =>{
+        console.log("ENTRA ACA")
+        //VERIFICACION 
+        let verificacionId = Usuario.find(req.body._id);
+        if(verificacionId){
+            res.status(200).send({message : "Existe usuario"});    
+        }
+        console.log(req.body.nombre)
         let body = req.body;
         const usuario  = new Usuario({
             nombre           : body.nombre,
             estado           : body.estado,
             username         : body.username,
-            email            : body.email,
-            password         : await Usuario.encryptPassword(body.password)
+            email            : body.email ,
+            password         : body.password ? await Usuario.encryptPassword(body.password) : "pass"
         })
         console.log("Pdazo"+usuario)
         if(body.roles){
@@ -116,6 +123,34 @@ export const deleteUserById = async (req, res)=>{
     
 }
 
+export const verifyUser = async (req, res)=>{
+    try{
+        let {id} = req.params;
+        const usuarioVerificado = await Usuario.findById(id);
+        console.log("Usuario",usuarioVerificado);
+        if(usuarioVerificado){
+            console.log("ENtra a ptra verdi", usuarioVerificado.roles[0])
+            let foundRol = await Rol.find({_id :{$in: usuarioVerificado.roles}})
+            let rols = foundRol.map((rol) => rol.nombreRol === 'user');
+            if(rols.includes(true)){
+                res.status(200).json({
+                    "state" : true
+                })
+            }else{
+                throw new Error("No existe ese rol de usuario")
+            }
+
+        }
+        
+    }catch(e){
+            res.status(404).json({
+            "message" : false
+        })
+    };
+    // if(_id){
+
+    // }
+}
 //FUNCIONES DE LOS CONTROLLERS-------------------------------------------------------------------------------------------------------------
 
 const obtenerUsuarios =async  ()=>{

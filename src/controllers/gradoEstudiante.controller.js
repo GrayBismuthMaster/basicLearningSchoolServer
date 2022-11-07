@@ -1,17 +1,12 @@
-const Grado = require('../models/Grado');
-const Rol = require ('../models/Rol');
+const GradoEstudiante = require('../models/GradoEstudiante');
 
-import jwt from 'jsonwebtoken';
-require('dotenv').config({path: 'variables.env'});
-
-export const createGrado = async (req, res) =>{
-        const {nombre, id_profesores, id_materias} = req.body;
-        const grado  = new Grado({
-            nombre,      
-            id_profesores,   
-            id_materias  
+export const createGradoEstudiante = async (req, res) =>{
+        const {id_estudiante, id_clase} = req.body;
+        const gradoEstudiante  = new GradoEstudiante({      
+            id_estudiante,   
+            id_clase  
         })
-        console.log("Grado"+grado)
+        console.log("GradoEstudiante"+gradoEstudiante)
         // if(roles){
         //     console.log(body.roles)
         //     const foundRol = await Rol.find({nombreRol :{$in: body.roles}})
@@ -22,12 +17,12 @@ export const createGrado = async (req, res) =>{
         //Obtiene el id del rol usuario
         // usuario.roles = [rol._id];
         // }
-        const savedGrado = await grado.save();
+        const savedGradoEstudiante = await gradoEstudiante.save();
         
        res.status(202)
         .send({
             message:"Creación completa",
-            data: savedGrado,
+            data: savedGradoEstudiante,
         })
        /*
         const resultado = crearUsuario(body);
@@ -43,26 +38,26 @@ export const createGrado = async (req, res) =>{
         })
     */
 }
-export const getGrados = (req, res) =>{
+export const getGradosEstudiantes = (req, res) =>{
       //res.send("Welcome to user ");
-      let grados = obtenerGrados();
-      grados.then((accesoGrados)=>{
-          res.json(accesoGrados)
+      let gradosEstudiantes = obtenerGradosEstudiantes();
+      gradosEstudiantes.then((accesoGradosEstudiantes)=>{
+          res.json(accesoGradosEstudiantes)
       })
       .catch((error)=>{
           console.log(error);
       })
 }
-export const getGradoById = async (req, res) =>{
-        const grado = await Grado.findById(req.params.id);
-        res.status(200).json(grado);
+export const getGradoEstudianteById = async (req, res) =>{
+        const gradoEstudiante = await GradoEstudiante.findById(req.params.id);
+        res.status(200).json(gradoEstudiante);
 }
-export const updateGradoById = async (req, res) =>{
+export const updateGradoEstudianteById = async (req, res) =>{
         //Para obtener datos actualizados el tercer param
-        const gradoActualizado = await Grado.findByIdAndUpdate(req.params.id, req.body ,{
+        const gradoEstudianteActualizado = await GradoEstudiante.findByIdAndUpdate(req.params.id, req.body ,{
             new :true
         });
-        res.status(200).json(gradoActualizado);
+        res.status(200).json(gradoEstudianteActualizado);
         //Encontrar si existe el objeto
         //Buscando usuario pero como es int entonces parseamos
         //let usuario = existeUsuario();
@@ -80,9 +75,9 @@ export const updateGradoById = async (req, res) =>{
         res.send(usuario);
         */
 }
-export const deleteGradoById = async (req, res)=>{
-        await Grado.findByIdAndDelete(req.params.id);
-        res.status(204).json();
+export const deleteGradoEstudianteById = async (req, res)=>{
+        await GradoEstudiante.findByIdAndDelete(req.params.id);
+        res.status(204).json({"message" : "Success delete"});
         //let usuario = existeUsuario(req.params.id);
         //Revisando que exista caso contrario enviamos un cod 404
         //if(!usuario) {
@@ -96,16 +91,7 @@ export const deleteGradoById = async (req, res)=>{
 
 //FUNCIONES DE LOS CONTROLLERS-------------------------------------------------------------------------------------------------------------
 
-const obtenerGrados =async  ()=>{
-    const grados = await Grado.find({}).populate("id_materias").populate("id_profesores");
-    return grados;
-}
-
-//Obtener usuario por ID
-const validarUsuario = (nom)=>{
-    //Agregando JOI para validaciones
-    const schema = Joi.object({
-        nombre: Joi.string().min(3).required()
-    });
-    return (schema.validate({ nombre:nom}))
+const obtenerGradosEstudiantes =async  ()=>{
+    const gradosEstudiantes = await GradoEstudiante.find({}).populate("id_estudiante").populate("id_clase");
+    return gradosEstudiantes;
 }

@@ -8,14 +8,15 @@ import * as usersController from '../controllers/usuarios.controller'
 //Petición Get que obtiene todos los usuarios
 router.get('/', /*authJwt.verifyToken,*/ usersController.getUsers)
 //Petición POST que crea un usuario
-router.post('/',/*authJwt.verifyToken*,/ /*authJwt.isAdmin , verifySignup.checkRolesExisted,*/ verifySignup.checkDuplicateUsernameOrEmail, usersController.createUser)
+router.post('/',/*authJwt.verifyToken*,/ /*authJwt.isAdmin , verifySignup.checkRolesExisted,*/ /*verifySignup.checkDuplicateUsernameOrEmail, */usersController.createUser)
 //Petición GET para obtener usuario por id
-router.get('/:id',usersController.getUserById)
+router.get('/:id',usersController.getUserById);
 //Petición PUT para modificar un usuario por id 
-router.put('/:id',usersController.updateUserById)
+router.put('/:id',usersController.updateUserById);
 //Petición Delete para borrar un usuario por id
-router.delete('/:id',usersController.deleteUserById)
-
+router.delete('/:id',usersController.deleteUserById);
+//Verificar usuario para inicio
+router.get('/verifyUser/:id?', usersController.verifyUser);
 //Petición get para el error 404
 router.get('*',(req,res)=>{
     res

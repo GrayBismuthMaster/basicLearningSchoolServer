@@ -89,7 +89,7 @@ export const gameUserRegister = async(req, res)=>{
         })
 }
 export const signup = async(req, res) =>{
-    const {nombre, cedula, fecha_nacimiento, sexo, estado_civil, religion, ocupacion, lugar_nacimiento, residencia, domicilio, telefono, estado, imagen, username, email, password, roles}=req.body;
+    const {nombre, estado, imagen, username, email, password, roles}=req.body;
     console.log(req.body);
     const newUser = new User({
         nombre, 
@@ -105,7 +105,7 @@ export const signup = async(req, res) =>{
         // telefono, 
         estado, 
         imagen, 
-        username, 
+        username : !req.body.username ? Date.now() : username, 
         email, 
         password : await User.encryptPassword(password)
     })
