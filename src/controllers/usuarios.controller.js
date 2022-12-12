@@ -134,6 +134,7 @@ export const verifyUser = async (req, res)=>{
             let rols = foundRol.map((rol) => rol.nombreRol === 'user');
             if(rols.includes(true)){
                 res.status(200).json({
+                    "user" : usuarioVerificado,
                     "state" : true
                 })
             }else{
