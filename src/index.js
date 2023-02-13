@@ -6,6 +6,6 @@ import dbConexion from './config/db'
     const mongoEnvPro = "mongodb+srv://bls:adminBls@bls.kanrls4.mongodb.net/BLS";
     dbConexion(mongoEnvPro) 
     //const server = http.createServer(app);
-    app.listen({port:process.env.PROD_PORT||5001},()=>{
-        console.log(`Servidor Levantado en el puerto ${process.env.PROD_PORT}`);
+    app.listen({port:5000},()=>{
+        console.log(`Servidor Levantado en el puerto 5000`);
     }); 
