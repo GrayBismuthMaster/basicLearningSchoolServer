@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/Usuario';
 import Rol from '../models/Rol';
-require('dotenv').config({path: 'variables.env'});
+// require('dotenv').config({path: 'variables.env'});
 //THis function tries to verify the token, and allows to continue
 export const verifyToken = async (req, res, next) =>{
     try{
@@ -16,7 +16,7 @@ export const verifyToken = async (req, res, next) =>{
         next();
         */
        const accessToken = req.cookies.accessToken;
-       const decoded = jwt.verify(accessToken, process.env.ACCESSTOKEN);
+       const decoded = jwt.verify(accessToken, '4d5b158e12ec41d4ee115fed1b48e0b153b0c897b6b2c3d3b9537f835a7bc21070e5c56f154506f7a370d743679bfe0fcd89379eeffdac6c495c115c322fb923');
        req.userId = decoded.id;
        const user = await User.findById(req.userId, {password: 0});
        if(!user) return res.status(404).json({message: "Usuario no encontrado"});
@@ -71,7 +71,7 @@ export const verifyTokenReturnUser = async (req, res) =>{
        const accessToken = req.headers["x-access-token"];
        console.log('Tojen desde server verificando')
        console.log(accessToken);
-       const decoded = jwt.verify(accessToken, process.env.ACCESSTOKEN);
+       const decoded = jwt.verify(accessToken, "4d5b158e12ec41d4ee115fed1b48e0b153b0c897b6b2c3d3b9537f835a7bc21070e5c56f154506f7a370d743679bfe0fcd89379eeffdac6c495c115c322fb923");
        req.userId = decoded.id;
        const user = await User.findById(req.userId, {password: 0});
        if(!user) return res.status(404).json({message: "Usuario no encontrado"});
