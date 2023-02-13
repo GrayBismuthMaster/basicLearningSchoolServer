@@ -42,19 +42,19 @@ app.use('/public',express.static(`${__dirname}/public`));
 
 
 //Morgan es un middleware de terceros para el registro de las peticiones http
-if(app.get('env')==='development'){
-    app.use(morgan('tiny'));
-    //console.log('morgan habilitado');
+// if(app.get('env')==='development'){
+//     app.use(morgan('tiny'));
+//     //console.log('morgan habilitado');
     
-    debug('Morgan está habilitado');
-    app.use(cors({origin:'http://localhost:3000', credentials:true}));
-}
-if(app.get('env')==='production'){
+//     debug('Morgan está habilitado');
+//     app.use(cors({origin:'http://localhost:3000', credentials:true}));
+// }
+// if(app.get('env')==='production'){
     //app.use(cors({origin:'http://dermatologiaBettyGarzon:3000', credentials:true}))
     app.use(cors({origin:'*'}))
-}
+// }
 //Trabajos con la base de datos
-debug('Conectando con la base de datos');
+// debug('Conectando con la base de datos');
 
 //Middleware cuando uso la api de usuarios
 app.use('/api/usuarios',usuarios);
