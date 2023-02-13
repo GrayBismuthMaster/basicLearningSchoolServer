@@ -1,7 +1,7 @@
 const Usuario = require('../models/Usuario');
 const Rol = require ('../models/Rol');
 import jwt from 'jsonwebtoken';
-require('dotenv').config({path: 'variables.env'});
+// require('dotenv').config({path: 'variables.env'});
 
 export const createUser = async (req, res) =>{
         console.log("ENTRA ACA")
@@ -32,10 +32,10 @@ export const createUser = async (req, res) =>{
         }
         const savedUser = await usuario.save();
         //Token para 24 horas
-        const accessToken = jwt.sign({id: savedUser._id},process.env.ACCESSTOKEN,{
+        const accessToken = jwt.sign({id: savedUser._id},"4d5b158e12ec41d4ee115fed1b48e0b153b0c897b6b2c3d3b9537f835a7bc21070e5c56f154506f7a370d743679bfe0fcd89379eeffdac6c495c115c322fb923",{
         expiresIn: 86400
         })
-        const refreshToken = jwt.sign({id: savedUser._id},process.env.REFRESHTOKEN,{
+        const refreshToken = jwt.sign({id: savedUser._id},"4dba9a5c25494e3db6dd3043bc33e2f404dee7f4ad6ccea3498befd5c874b24ea4566eb7e405f80e8b61be673d2ca9ba5ce6c5dde209d58ab033da26611015a0",{
             expiresIn: 86400
         })
         //LocalStorage

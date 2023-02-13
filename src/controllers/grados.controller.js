@@ -1,8 +1,8 @@
 const Grado = require('../models/Grado');
 const Rol = require ('../models/Rol');
 
-import jwt from 'jsonwebtoken';
-require('dotenv').config({path: 'variables.env'});
+// import jwt from 'jsonwebtoken';
+// require('dotenv').config({path: 'variables.env'});
 
 export const createGrado = async (req, res) =>{
         const {nombre, id_profesores, id_materias} = req.body;
