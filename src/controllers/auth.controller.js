@@ -29,10 +29,10 @@ export const signIn = async (req, res) =>{
        //Refresh Tokens
        refreshTokens.push(refreshToken)
        //Token con cookies httpOnly
-       const accessToken = jwt.sign({id: userFound._id},process.env.ACCESSTOKEN,{
+       const accessToken = jwt.sign({id: userFound._id},"4d5b158e12ec41d4ee115fed1b48e0b153b0c897b6b2c3d3b9537f835a7bc21070e5c56f154506f7a370d743679bfe0fcd89379eeffdac6c495c115c322fb923",{
         expiresIn: 86400
         })
-        const refreshToken = jwt.sign({id: userFound._id},process.env.REFRESHTOKEN,{
+        const refreshToken = jwt.sign({id: userFound._id},"4dba9a5c25494e3db6dd3043bc33e2f404dee7f4ad6ccea3498befd5c874b24ea4566eb7e405f80e8b61be673d2ca9ba5ce6c5dde209d58ab033da26611015a0",{
             expiresIn: 86400
         })
         //LocalStorage
@@ -121,10 +121,10 @@ export const signup = async(req, res) =>{
     const savedUser = await newUser.save();
     console.log(savedUser);
     //Token para 24 horas
-        const accessToken = jwt.sign({id: savedUser._id},process.env.ACCESSTOKEN,{
+        const accessToken = jwt.sign({id: savedUser._id},"4d5b158e12ec41d4ee115fed1b48e0b153b0c897b6b2c3d3b9537f835a7bc21070e5c56f154506f7a370d743679bfe0fcd89379eeffdac6c495c115c322fb923",{
         expiresIn: 86400
         })
-        const refreshToken = jwt.sign({id: savedUser._id},process.env.REFRESHTOKEN,{
+        const refreshToken = jwt.sign({id: savedUser._id},"4dba9a5c25494e3db6dd3043bc33e2f404dee7f4ad6ccea3498befd5c874b24ea4566eb7e405f80e8b61be673d2ca9ba5ce6c5dde209d58ab033da26611015a0",{
             expiresIn: 86400
         })
         //LocalStorage
@@ -160,9 +160,9 @@ export const refreshToken = async(req,res,next) =>{
     const refreshToken = req.cookies.refreshToken;
     if(!refreshToken ) return res.status(403).send({message:"Token regenerado no encontado, por favor logeese de nuevo"}); 
     if(!refreshTokens.includes(refreshToken)) return res.status(403).send({message: "Token regenerado bloqueado, por favor logeese de nuevo"});
-    jwt.verify(refreshToken,process.env.REFRESHTOKEN,(err,id)=>{
+    jwt.verify(refreshToken,"4dba9a5c25494e3db6dd3043bc33e2f404dee7f4ad6ccea3498befd5c874b24ea4566eb7e405f80e8b61be673d2ca9ba5ce6c5dde209d58ab033da26611015a0",(err,id)=>{
         if(!err){
-            const accessToken = jwt.sign({id: id},process.env.ACCESSTOKEN,{
+            const accessToken = jwt.sign({id: id},"4d5b158e12ec41d4ee115fed1b48e0b153b0c897b6b2c3d3b9537f835a7bc21070e5c56f154506f7a370d743679bfe0fcd89379eeffdac6c495c115c322fb923",{
                 expiresIn: 86400
             })
 
