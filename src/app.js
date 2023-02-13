@@ -23,7 +23,7 @@ import usuarios from './routes/usuarios.routes';
 import auth from './routes/auth.routes'
 import profile from './routes/profile.routes' ;
 // import pdf from './routes/pdf.routes'
-import uploads from './routes/uploads.routes';
+// import uploads from './routes/uploads.routes';
 import grados from './routes/grados.routes';
 import materias from './routes/materias.routes';
 import gradosEstudiantes from './routes/gradosEstudiantes.routes';
