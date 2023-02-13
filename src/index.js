@@ -1,5 +1,5 @@
 import app from './app'
-require('dotenv').config({path: 'variables.env'})
+// require('dotenv').config({path: 'variables.env'})
 import dbConexion from './config/db'
 
     console.log("production");

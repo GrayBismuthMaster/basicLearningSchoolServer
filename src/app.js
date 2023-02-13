@@ -1,6 +1,6 @@
 
 //Depuración
-const debug = require('debug')('app:inicio');
+// const debug = require('debug')('app:inicio');
 //Debug de DB
 import express from 'express'
 //import config from './config'
