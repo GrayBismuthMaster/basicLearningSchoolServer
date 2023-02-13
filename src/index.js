@@ -13,7 +13,7 @@ if(process.env.NODE_ENV !== 'production'){
     }); 
 }else{
     console.log("production");
-    const mongoEnvPro = process.env.DB_MONGO_PRO;
+    const mongoEnvPro = process.env.DB_MONGO_ATLAS_PRO;
     dbConexion(mongoEnvPro) 
     //const server = http.createServer(app);
     app.listen({port:process.env.PROD_PORT||5001},()=>{
