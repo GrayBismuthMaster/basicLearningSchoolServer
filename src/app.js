@@ -61,7 +61,7 @@ app.use('/api/usuarios',usuarios);
 app.use('/api/auth',auth);
 app.use('/api/profile', profile );
 // app.use('/api/pdf' ,pdf )
-app.use('/api/uploads', uploads);
+// app.use('/api/uploads', uploads);
 app.use('/api/grados', grados);
 app.use('/api/materias', materias);
 app.use('/api/gradosEstudiantes', gradosEstudiantes);
