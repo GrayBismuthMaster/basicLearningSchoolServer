@@ -1,7 +1,7 @@
 import User from '../models/Usuario';
 import jwt from 'jsonwebtoken';
 import Rol from '../models/Rol';
-require('dotenv').config({path: 'variables.env'})
+// require('dotenv').config({path: 'variables.env'})
 let refreshTokens = [];
 
 
