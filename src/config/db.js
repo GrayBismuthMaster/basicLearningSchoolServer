@@ -1,6 +1,6 @@
 //Pruebas DB
 import mongoose from 'mongoose'
-require('dotenv').config({path: 'variables.env'})
+// require('dotenv').config({path: 'variables.env'})
 const conectarDB = async (devEnv)=>{
     try{
         await mongoose.connect(devEnv,
