@@ -3,7 +3,7 @@ import app from './app'
 import dbConexion from './config/db'
 
     console.log("production");
-    const mongoEnvPro = process.env.DB_MONGO_ATLAS_PRO;
+    const mongoEnvPro = "mongodb+srv://bls:adminBls@bls.kanrls4.mongodb.net/BLS";
     dbConexion(mongoEnvPro) 
     //const server = http.createServer(app);
     app.listen({port:process.env.PROD_PORT||5001},()=>{
