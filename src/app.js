@@ -9,7 +9,7 @@ const app = express();
 const cookieParser = require('cookie-parser')
 //Middleware cookieParser
 app.use(cookieParser())
-import morgan from 'morgan'
+// import morgan from 'morgan'
 //Cors
 var cors = require('cors');
 //Middleware de express para manejar post
