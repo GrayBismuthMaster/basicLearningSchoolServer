@@ -155,7 +155,7 @@ export const verifyUser = async (req, res)=>{
 //FUNCIONES DE LOS CONTROLLERS-------------------------------------------------------------------------------------------------------------
 
 const obtenerUsuarios =async  ()=>{
-    const usuarios = await Usuario.find({});
+    const usuarios = await Usuario.find({}).populate('Rol');
     return usuarios;
 }
 
