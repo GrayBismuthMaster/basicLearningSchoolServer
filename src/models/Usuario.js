@@ -10,7 +10,8 @@ const usuarioSchema = new mongoose.Schema({
                                 default:Date.now()
                             },
     imagen              :   {
-                                type : String, 
+                                type : String,
+                                default : 'https://cdn.icon-icons.com/icons2/933/PNG/512/user-shape_icon-icons.com_72487.png' 
                             },
     estado              :   {
                                 type: Boolean,

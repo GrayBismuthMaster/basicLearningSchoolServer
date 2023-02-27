@@ -6,10 +6,10 @@ import jwt from 'jsonwebtoken';
 export const createUser = async (req, res) =>{
         console.log("ENTRA ACA")
         //VERIFICACION 
-        let verificacionId = Usuario.find(req.body._id);
-        if(verificacionId){
-            res.status(200).send({message : "Existe usuario"});    
-        }
+        // let verificacionId = Usuario.find(req.body._id);
+        // if(verificacionId){
+        //     res.status(200).send({message : "Existe usuario"});    
+        // }
         console.log(req.body.nombre)
         let body = req.body;
         const usuario  = new Usuario({
